@@ -239,17 +239,17 @@
   </div>
   <script src="script.js"></script>
   <script>
-  (function waitForGoatCounter() {
-    if (window.goatcounter && window.goatcounter.visit_count) {
-      window.goatcounter.visit_count({
-        append: '#visitor-counter',
-        path: 'TOTAL',
-        no_branding: true
-      });
-    } else {
-      setTimeout(waitForGoatCounter, 100);
-    }
-  })();
+fetch('https://aiueo555.goatcounter.com/counter/TOTAL.json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('visitor-counter').textContent =
+      '累計訪問数：' + data.count;
+  })
+  .catch(error => {
+    document.getElementById('visitor-counter').textContent =
+      '訪問数を取得できません';
+    console.error(error);
+  });
 </script>
 </body>
 </html>
